@@ -25,7 +25,7 @@ class cv:
 		flandfrc = xr.open_dataset(fland)
 
 		farea = cdo.gridarea(input=f, returnXDataset=True)
-		farea = farea.sel(lat=slice(-10,10), lon=slice(120,360-90))
+		farea = farea.sel(lat=slice(-5,5), lon=slice(120,360-90))
 
 		# Mask land
 		data = f["TS"][10:-2,:,:].sel(lat=slice(-5,5), lon=slice(120,360-90))

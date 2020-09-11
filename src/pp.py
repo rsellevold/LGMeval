@@ -2,6 +2,9 @@ import os, sys
 from scipy.stats import linregress
 import xarray as xr
 import numpy as np
+from cdo import Cdo
+
+cdo = Cdo()
 
 class pp:
 
@@ -37,6 +40,72 @@ class pp:
                         tren[k,y,x], _, r[k,y,x], p[k,y,x], _ = linregress(np.arange(0,tt,1), data[:,k,y,x])
         
         return tren, r, p
+
+
+    def _areastat(self, data, weights, arith="mean"):
+        if data.ndim==3:
+            if arith=="mean":
+                data = np.sum(data * weights[np.newaxis,...], axis=(1,2)) / np.sum(weights)
+            elif arith=="sum":
+                data = np.sum(data * weights[np.newaxis,...], axis=(1,2))
+        if data.ndim==4:
+            if arith=="mean":
+                data = np.sum(data * weights[np.newaxis,np.newaxis,...], axis=(2,3)) / np.sum(weights)
+            elif arith=="sum":
+                data = np.sum(data * weights[np.newaxis,np.newaxis,...], axis=(2,3))
+        return data
+
+
+    def timeseries(self, varlist, htype, region="global"):
+        print("Calculating timeseries for:")
+        fdirin = f"{self.diri}/{self.run}/{self.comp}/hist/{htype}"
+        fdirout = f"{self.diri}/{self.run}/{self.comp}/timeseries/{region}/{htype}"
+        check = os.path.exists(fdirout)
+        if not(check):
+            os.system(f"mkdir -p {fdirout}")
+
+        for var in varlist:
+            print(var)
+            f = xr.open_dataset(f"{fdirin}/{var}.{self.ystart}-{self.yend}.nc")
+            farea = cdo.gridarea(input=f, returnXDataset=True)
+            if var=="ICEFRAC":
+                f[var].values[f[var].values<0.15] = 0.0
+                f[var].values[f[var].values>=0.15] = 1.0
+
+            if region=="global":
+                if var=="ICEFRAC":
+                    data = self._areastat(f[var].values, farea.cell_area.values, arith="sum")
+                else:
+                    data = self._areastat(f[var].values, farea.cell_area.values)
+
+            elif region=="NH":
+                if var=="ICEFRAC":
+                    data = self._areastat(f[var].sel(lat=slice(0,90)).values, farea.sel(lat=slice(0,90)).cell_area.values, arith="sum")
+                else:
+                    data = self._areastat(f[var].sel(lat=slice(0,90)).values, farea.sel(lat=slice(0,90)).cell_area.values)
+
+            elif region=="SH":
+                if var=="ICEFRAC":
+                    data = self._areastat(f[var].sel(lat=slice(-90,0)).values, farea.sel(lat=slice(-90,0)).cell_area.values, arith="sum")
+                else:
+                    data = self._areastat(f[var].sel(lat=slice(-90,0)).values, farea.sel(lat=slice(-90,0)).cell_area.values)
+
+            elif region=="tropical":
+                if var=="ICEFRAC":
+                    data = self._areastat(f[var].sel(lat=slice(-30,30)).values, farea.sel(lat=slice(-30,30)).cell_area.values, arith="sum")
+                else:
+                    data = self._areastat(f[var].sel(lat=slice(-30,30)).values, farea.sel(lat=slice(-30,30)).cell_area.values)
+            
+            if data.ndim == 1:
+                data = xr.DataArray(data, name=var, dims=("time"), coords=[f.time])
+            if data.ndim == 2:
+                data = xr.DataArray(data, name=var, dims=("time","lev"), coords=[f.time, f.lev])
+            data.to_dataset()
+            data.encoding["unlimited_dims"] = "time"
+            data.to_netcdf(f"{fdirout}/{var}.{self.ystart}-{self.yend}.nc")
+
+
+
 
     def trend(self, varlist, htype, nyears="all"):
         print("Calculating trend for:")

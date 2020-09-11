@@ -1,15 +1,17 @@
 import yaml, sys
 import src
 
-##########
-# Merging of history files
-##########
-
 # Get variable dictionary
 with open("src/vars/cam.yml","r") as f:
 	atmdict = yaml.safe_load(f)
 
-def hist_atm(info,atmdict):
+
+
+###############
+# Atmosphere
+###############
+
+def hist_atm(info,atmdict): # Merge atmosphere history files and save to scratch
 	# Atmosphere (h0)
 	varlist = ["CLDHGH", "CLDLOW", "CLDMED", "CLDTOT", "FLDS", "FLNS", "FLNSC", "FLNT", "FSDS", "FSDSC", "FSNS",
 		"FSNSC", "FSNT", "ICEFRAC", "LHFLX", "PRECC", "PRECL", "PRECSC", "PRECSL", "PSL", "SHFLX", "TGCLDCWP",
@@ -30,8 +32,7 @@ def hist_atm(info,atmdict):
 	src.mon2seas(info, "atm", varlist)
 	src.mon2ann(info, "atm", varlist)
 
-def proc_atm(info):
-	# Make timeseries of all variables
+def proc_atm(info): # Post-process atmospheric fields
 	diri = info["run"]["folder"]
 	run = info["run"]["name"]
 	ystart = info["run"]["ystart"]
@@ -41,16 +42,22 @@ def proc_atm(info):
 	varlist = ["ALBEDO", "CLDHGH", "CLDLOW", "CLDMED", "CLDTOT", "FLDS", "FLNS", "FLNSC", "FLNT", "FSDS", "FSDSC", "FSNS", 
 		"FSNSC", "FSNSC", "FSNT", "ICEFRAC", "LANDFRAC", "LHFLX", "LWCF", "OCNFRAC", "PRECC", "PRECL", "PRECSC", "PRECSL",
 		"PRECT", "PSL", "QREFHT", "RAIN", "SHFLX", "SNOW", "SWCF", "TGCLDCWP", "TGCLDIWP", "TMQ", "TREFHT", "TS", "U10",
-		"U250", "U500", "U850", "V250", "V500", "V850", "U", "V", "Z3"]
-	ATMpp.trend(varlist, "annavg", nyears=30)
+		"U250", "U500", "U850", "V250", "V500", "V850", "U", "V", "Z3", "RADTOA"]
+	
+	#ATMpp.trend(varlist, "annavg", nyears=30)
+
+	ATMpp.timeseries(varlist, "annavg")
+	ATMpp.timeseries(varlist, "annavg", region="NH")
+	ATMpp.timeseries(varlist, "annavg", region="tropical")
+	ATMpp.timeseries(varlist, "annavg", region="SH")
 
 
 
-##########
+###############
 # Climate variability
-##########
+###############
 
-def climate_variability(info):
+def climate_variability(info): # Calculate indexes for climate variability
 	diri = info["run"]["folder"]
 	run = info["run"]["name"]
 	ystart = info["run"]["ystart"]
@@ -60,9 +67,14 @@ def climate_variability(info):
 	clim.ENSO()
 	clim.NAO(["DJF","JJA"])
 
-##########
+
+
+
+
+
+###############
 # Main
-##########
+###############
 
 def main():
 	with open("src/vars/cam.yml","r") as f:
@@ -71,8 +83,8 @@ def main():
 	        info = yaml.safe_load(f)
 
 	#hist_atm(info,atmdict)
-	#proc_atm(info)
+	proc_atm(info)
 
-	climate_variability(info)
+	#climate_variability(info)
 	
 main()

@@ -40,7 +40,10 @@ def merge_hist(info, comp, varlist, vdict, hfile, htype, dimensions=2):
 	for var in varlist:
 		print(var)
 		if dimensions==3:
-			levels = xr.DataArray(np.array([500.0]), name="level", dims=("lev"))
+			levels = np.array([975.0, 950.0, 925.0, 900.0, 875.0, 850.0, 800.0, 750.0, 700.0, 600.0,
+								500.0, 450.0, 400.0, 300.0, 250.0, 225.0, 200.0, 150.0, 125.0, 100.0, 75.0, 
+								60.0, 50.0, 40.0, 35.0, 25.0, 15.0, 7.5])
+			levels = xr.DataArray(levels, name="level", dims=("lev"))
 			data = Ngl.vinth2p(f[var].values, f["hyam"].values[0,:], f["hybm"].values[0,:], levels.values, f["PS"], 1, 1000.0, 1, False)
 			data = xr.DataArray(data, name=var, dims=("time","lev","lat","lon"), coords=[f.time, levels, f.lat, f.lon])
 		else:
@@ -124,7 +127,7 @@ def calcadd_atm(info, varlist, vdict, htype):
 		FSNT = xr.open_dataset(f"{outfolder}/FSNT.{info['run']['ystart']}-{info['run']['yend']}.nc")
 		FLNT = xr.open_dataset(f"{outfolder}/FLNT.{info['run']['ystart']}-{info['run']['yend']}.nc")
 		RADTOA = FSNT["FSNT"] - FLNT["FLNT"]
-		RAIN.name = "RADTOA"
+		RADTOA.name = "RADTOA"
 		RADTOA.values = RADTOA.values * vdict["RADTOA"]["scalar"]
 		RADTOA.attrs["units"] = vdict["RADTOA"]["units"]
 		RADTOA.attrs["long_name"] = vdict["RADTOA"]["long_name"]
