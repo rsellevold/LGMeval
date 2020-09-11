@@ -1,0 +1,275 @@
+ALBEDO:
+  scalar: 1.0
+  units: "-"
+  long_name: "Albedo"
+  cmap: "Reds_r"
+
+CLDHGH:
+  scalar: 1.0
+  units : "-"
+  long_name: "High cloud cover"
+  cmap: "Blues_r"
+
+CLDLOW:
+  scalar: 1.0
+  units: "-"
+  long_name: "Low cloud cover"
+  cmap: "Blues_r"
+
+CLDMED:
+  scalar: 1.0
+  units: "-"
+  long_name: "Medium cloud cover"
+  cmap: "Blues_r"
+
+CLDTOT:
+  scalar: 1.0
+  units: "-"
+  long_name: "Total cloud cover"
+  cmap: "Blues_r"
+
+FLDS:
+  scalar: 1.0
+  units: "W m$^{-2}$"
+  long_name: "Incoming longwave radiation"
+  cmap: "Reds"
+
+FLNS:
+  scalar: 1.0
+  units: "W m$^{-2}$"
+  long_name: "Net longwave radiation"
+  cmap: "Reds"
+
+FLNSC:
+  scalar: 1.0
+  units: "W m$^{-2}$"
+  long_name: "Clearsky net longwave radiation"
+  cmap: "Reds"
+
+FLNT:
+  scalar: 1.0
+  units: "W m$^{-2}$"
+  long_name: "TOA net longwave radiation"
+  cmap: "Reds"
+
+FSDS:
+  scalar: 1.0
+  units: "W m$^{-2}$"
+  long_name: "Incoming solar radiation"
+  cmap: "Reds"
+
+FSDSC:
+  scalar: 1.0
+  units: "W m$^{-2}$"
+  long_name: "Clearsky incoming solar radiation"
+  cmap: "Reds"
+
+FSNS:
+  scalar: 1.0
+  units: "W m$^{-2}$"
+  long_name: "Net solar radiation"
+  cmap: "Reds"
+
+FSNSC:
+  scalar: 1.0
+  units: "W m$^{-2}$"
+  long_name: "Clearsky net solar radiation"
+  cmap: "Reds"
+
+FSNT:
+  scalar: 1.0
+  units: "W m$^{-2}$"
+  long_name: "TOA net solar radiation"
+  cmap: "Reds"
+
+ICEFRAC:
+  scalar: 1.0
+  units: "-"
+  long_name: "Sea-ice fraction"
+  cmap: "Blues_r"
+
+LANDFRAC:
+  scalar: 1.0
+  units: "-"
+  long_name: "Land fraction"
+  cmap: "Reds"
+
+LHFLX:
+  scalar: 1.0
+  units: "-"
+  long_name: "Latent heat flux"
+  cmap: "RdBu_r"
+
+LWCF:
+  scalar: 1.0
+  units: "W m$^{-2}$"
+  long_name: "Longwave cloud forcing"
+  cmap: "RdBu_r"
+
+OCNFRAC:
+  scalar: 1.0
+  units: "-"
+  long_name: "Ocean fraction"
+  cmap: "Reds"
+
+PRECC:
+  scalar: 31536000000.0
+  units: "-"
+  long_name: "Convective precipitation"
+  cmap: "Blues_r"
+
+PRECL:
+  scalar: 31536000000.0
+  units: "mm yr$^{-1}$"
+  long_name: "Large-scale precipitation"
+  cmap: "Blues_r"
+
+PRECSC:
+  scalar: 31536000000.0
+  units: "mm yr$^{-1}$"
+  long_name: "Convective snowfall"
+  cmap: "Blues_r"
+
+PRECSL:
+  scalar: 31536000000.0
+  units: "mm yr$^{-1}$"
+  long_name: "Large-scale snowfall"
+  cmap: "Blues_r"
+
+PRECT:
+  scalar: 1.0
+  units: "m s$^{-1}$"
+  long_name: "Precipitation"
+  cmap: "Blues_r"
+
+PSL:
+  scalar: 100.0
+  units: "hPa"
+  long_name: "Sea-level pressure"
+  cmap: "Reds"
+
+QREFHT:
+  scalar: 1000.0
+  units: "g kg$^{-1}$"
+  long_name: "Near-surface humidity"
+  cmap: "Reds"
+
+RADTOA:
+  scalar: 1.0
+  units: "W m$^{-1}$"
+  long_name: "Net TOA radiation"
+  cmap: "RdBu_r"
+
+RAIN:
+  scalar: 1.0
+  units: "m s$^{-1}$"
+  long_name: "Rainfall"
+  cmap: "Blues_r"
+
+SHFLX:
+  scalar: 1.0
+  units: "W m$^{-2}$"
+  long_name: "Sensible heat flux"
+  cmap: "Reds"
+
+SNOW:
+  scalar: 1.0
+  units: "m s$^{-1}$"
+  long_name: "Snowfall"
+  cmap: "Blues_r"
+
+SWCF:
+  scalar: 1.0
+  units: "W m$^{-2}$"
+  long_name: "Solar cloud forcing"
+  cmap: "Reds"
+
+TGCLDCWP:
+  scalar: 1.0
+  units: "mm"
+  long_name: "Cloud water path"
+  cmap: "Blues_r"
+
+TGCLDIWP:
+  scalar: 1.0
+  units: "mm"
+  long_name: "Ice water path"
+  cmap: "Blues_r"
+
+TMQ:
+  scalar: 1.0
+  units: "mm"
+  long_name: "Total precipitable water"
+  cmap: "Blues_r"
+
+TREFHT:
+  scalar: 1.0
+  units: "K"
+  long_name: "Near-surface temperature"
+  cmap: "Reds"
+
+TS:
+  scalar: 1.0
+  units: "K"
+  long_name: "Surface temperature"
+  cmap: "Reds"
+
+U:
+  scalar: 1.0
+  units: "m s$^{-1}$"
+  long_name: "Zonal wind speed"
+  cmap: "Reds"
+
+U10:
+  scalar: 1.0
+  units: "m s$^{-1}$"
+  long_name: "10m wind speed"
+  cmap: "Reds"
+
+U250:
+  scalar: 1.0
+  units: "m s$^{-1}$"
+  long_name: "250 hPa zonal wind speed"
+  cmap: "Reds"
+
+U500:
+  scalar: 1.0
+  units: "m s$^{-1}$"
+  long_name: "500 hPa zonal wind speed"
+  cmap: "Reds"
+
+U850:
+  scalar: 1.0
+  units: "m s$^{-1}$"
+  long_name: "850 hPa zonal wind speed"
+  cmap: "Reds"
+
+V250:
+  scalar: 1.0
+  units: "m s$^{-1}$"
+  long_name: "250 hPa meridional wind speed"
+  cmap: "Reds"
+
+V:
+  scalar: 1.0
+  units: "m s$^{-1}$"
+  long_name: "Meridional wind speed"
+  cmap: "Reds"
+
+V500:
+  scalar: 1.0
+  units: "m s$^{-1}$"
+  long_name: "500 hPa meridional wind speed"
+  cmap: "Reds"
+
+V850:
+  scalar: 1.0
+  units: "m s$^{-1}$"
+  long_name: "850 hPa meridional wind speed"
+  cmap: "Reds"
+
+Z3:
+  scalar: 1.0
+  units: "m"
+  long_name: "Geopotential heights"
+  cmap: "Reds"
