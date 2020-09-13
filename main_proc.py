@@ -44,12 +44,14 @@ def proc_atm(info): # Post-process atmospheric fields
 		"PRECT", "PSL", "QREFHT", "RAIN", "SHFLX", "SNOW", "SWCF", "TGCLDCWP", "TGCLDIWP", "TMQ", "TREFHT", "TS", "U10",
 		"U250", "U500", "U850", "V250", "V500", "V850", "U", "V", "Z3", "RADTOA"]
 	
-	#ATMpp.trend(varlist, "annavg", nyears=30)
+	ATMpp.trend(varlist, "annavg", nyears=30)
 
 	ATMpp.timeseries(varlist, "annavg")
 	ATMpp.timeseries(varlist, "annavg", region="NH")
 	ATMpp.timeseries(varlist, "annavg", region="tropical")
 	ATMpp.timeseries(varlist, "annavg", region="SH")
+
+	ATMpp.zonalmean(varlist, "annavg")
 
 
 
@@ -82,9 +84,9 @@ def main():
 	with open("runs.yml","r") as f:
 	        info = yaml.safe_load(f)
 
-	#hist_atm(info,atmdict)
+	hist_atm(info,atmdict)
 	proc_atm(info)
 
-	#climate_variability(info)
+	climate_variability(info)
 	
 main()

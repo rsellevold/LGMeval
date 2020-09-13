@@ -14,7 +14,8 @@ class pp:
         self.ystart = int(ystart)
         self.yend = int(yend)
         self.comp = comp
-    
+
+
 
     def _trend_calc(self,data,tt):
         if data.ndim == 3:
@@ -42,6 +43,7 @@ class pp:
         return tren, r, p
 
 
+
     def _areastat(self, data, weights, arith="mean"):
         if data.ndim==3:
             if arith=="mean":
@@ -56,6 +58,7 @@ class pp:
         return data
 
 
+
     def timeseries(self, varlist, htype, region="global"):
         print("Calculating timeseries for:")
         fdirin = f"{self.diri}/{self.run}/{self.comp}/hist/{htype}"
@@ -68,9 +71,6 @@ class pp:
             print(var)
             f = xr.open_dataset(f"{fdirin}/{var}.{self.ystart}-{self.yend}.nc")
             farea = cdo.gridarea(input=f, returnXDataset=True)
-            if var=="ICEFRAC":
-                f[var].values[f[var].values<0.15] = 0.0
-                f[var].values[f[var].values>=0.15] = 1.0
 
             if region=="global":
                 if var=="ICEFRAC":
@@ -104,6 +104,8 @@ class pp:
             data.encoding["unlimited_dims"] = "time"
             data.to_netcdf(f"{fdirout}/{var}.{self.ystart}-{self.yend}.nc")
 
+            f.close()
+            farea.close()
 
 
 
@@ -125,7 +127,7 @@ class pp:
                 yend = self.yend
             elif type(nyears)==int:
                 tren, r, p = self._trend_calc(f[var].values[-nyears:,...], nyears)
-                ystart = self.yend-nyears
+                ystart = self.yend-nyears+1
                 yend = self.yend
             elif type(nyears)==list:
                 tren, r, p = self._trend_calc(f[var].values[nyears[0]:nyears[1],...], tt[nyears[0],nyears[1]])
@@ -143,3 +145,33 @@ class pp:
 
             fout = xr.Dataset({"trend": tren, "r":r, "p":p})
             fout.to_netcdf(f"{fdirout}/{var}.{ystart}-{yend}.nc")
+
+            f.close()
+
+
+
+    def zonalmean(self, varlist, htype, region="global"):
+        print("Calculating zonal means for:")
+        fdirin = f"{self.diri}/{self.run}/{self.comp}/hist/{htype}"
+        fdirout = f"{self.diri}/{self.run}/{self.comp}/zonalmeans/{region}/{htype}"
+        check = os.path.exists(fdirout)
+        if not(check):
+            os.system(f"mkdir -p {fdirout}")
+
+        for var in varlist:
+            print(var)
+            f = xr.open_dataset(f"{fdirin}/{var}.{self.ystart}-{self.yend}.nc")
+
+            if region=="global":
+                data = np.nanmean(f[var].values, axis=-1)
+
+            if data.ndim==2:
+                data = xr.DataArray(data, name=var, dims=("time","lat"), coords=[f.time, f.lat])
+            elif data.ndim==3:
+                data = xr.DataArray(data, name=var, dims=("time","lev","lat"), coords=[f.time, f.lev, f.lat])
+
+            data.to_dataset()
+            data.encoding["unlimited_dims"] = "time"
+            data.to_netcdf(f"{fdirout}/{var}.{self.ystart}-{self.yend}.nc")
+
+            f.close()
