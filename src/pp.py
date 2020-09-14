@@ -60,7 +60,7 @@ class pp:
 
 
     def timeseries(self, varlist, htype, region="global"):
-        print("Calculating timeseries for:")
+        print("Calculating timeseries for: ", htype, region)
         fdirin = f"{self.diri}/{self.run}/{self.comp}/hist/{htype}"
         fdirout = f"{self.diri}/{self.run}/{self.comp}/timeseries/{region}/{htype}"
         check = os.path.exists(fdirout)
@@ -103,14 +103,14 @@ class pp:
             data.to_dataset()
             data.encoding["unlimited_dims"] = "time"
             data.to_netcdf(f"{fdirout}/{var}.{self.ystart}-{self.yend}.nc")
-
+            data.close()
             f.close()
             farea.close()
 
 
 
     def trend(self, varlist, htype, nyears="all"):
-        print("Calculating trend for:")
+        print("Calculating trend for:", htype)
         fdirin = f"{self.diri}/{self.run}/{self.comp}/hist/{htype}"
         fdirout = f"{self.diri}/{self.run}/{self.comp}/trend/{htype}"
         check = os.path.exists(fdirout)
@@ -145,13 +145,13 @@ class pp:
 
             fout = xr.Dataset({"trend": tren, "r":r, "p":p})
             fout.to_netcdf(f"{fdirout}/{var}.{ystart}-{yend}.nc")
-
+            fout.close()
             f.close()
 
 
 
     def zonalmean(self, varlist, htype, region="global"):
-        print("Calculating zonal means for:")
+        print("Calculating zonal means for:", htype, region)
         fdirin = f"{self.diri}/{self.run}/{self.comp}/hist/{htype}"
         fdirout = f"{self.diri}/{self.run}/{self.comp}/zonalmeans/{region}/{htype}"
         check = os.path.exists(fdirout)
@@ -173,5 +173,5 @@ class pp:
             data.to_dataset()
             data.encoding["unlimited_dims"] = "time"
             data.to_netcdf(f"{fdirout}/{var}.{self.ystart}-{self.yend}.nc")
-
+            data.close()
             f.close()

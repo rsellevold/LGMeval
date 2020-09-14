@@ -2,7 +2,7 @@ run:
   name: "LGM"
   folder: "/scratch-shared/raymond"
   ystart: "338"
-  yend: "403"
+  yend: "408"
 
 B-I-LGM-rest338-200817:
   folder: "/projects/0/couplice/archive"
