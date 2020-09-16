@@ -1,0 +1,29 @@
+run:
+  name: "LGM"
+  folder: "/scratch-shared/raymond"
+  ystart: 338
+  yend: 410
+
+trend:
+  significance: 0.05
+  nyears: 30 # Can be "all", a number of years, or a range (tuple)
+
+timeseries:
+  regions: ["global", "NH", "SH", "tropical"]
+
+runs:
+  B-I-LGM-rest338-200817:
+    folder: "/projects/0/couplice/archive"
+  B-I-rest356-LGM-200828:
+    folder: "/projects/0/couplice/archive"
+  B-I-rest371-LGM-200902:
+    folder: "/projects/0/couplice/archive"
+
+history:
+  atm:
+    h0:
+      varlist: ["CLDHGH", "CLDLOW", "CLDMED", "CLDTOT", "FLDS", "FLNS", "FLNSC", "FLNT", "FSDS", "FSDSC", "FSNS", "FSNSC", "FSNT", "ICEFRAC", "LHFLX", "PRECC", "PRECL", "PRECSC", "PRECSL", "PSL", "SHFLX", "TGCLDCWP", "TGCLDIWP", "TMQ", "TS", "U250", "U500", "U850", "V250", "V500", "V850"]
+      htype: "monavg"
+    h1:
+      varlist: ["LANDFRAC", "LWCF", "OCNFRAC", "QREFHT", "SWCF", "TREFHT", "U10"]
+      htype: "monavg"

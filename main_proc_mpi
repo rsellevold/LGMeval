@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH -N 1
+#SBATCH --time 00:30:00
+#SBATCH -p normal
+
+cd $HOME/LGMeval
+source /home/raymond/miniconda3/bin/activate LGM
+
+nproc=24
+###############
+# Merge history files
+###############
+# Atmosphere
+mpirun -n $nproc python process/atm/hist.py
+mpirun -n 1 python process/atm/calcadd.py
+mpirun -n $nproc python process/atm/avg_mon2seas.py
+mpirun -n $nproc python process/atm/avg_mon2ann.py
+mpirun -n $nproc python process/atm/trends.py
+mpirun -n $nproc python process/atm/timeseries.py
