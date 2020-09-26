@@ -22,3 +22,8 @@ mpirun -n $nproc python process/atm/timeseries.py
 # Sea ice
 ###############
 #mpirun -n $nproc python process/ice/hist.py
+
+###############
+# Ocean
+###############
+#mpirun -n $nproc python process/ocn/hist.py

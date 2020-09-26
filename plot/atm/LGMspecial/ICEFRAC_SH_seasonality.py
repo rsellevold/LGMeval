@@ -35,8 +35,6 @@ ice_SH_re = np.reshape(ice_SH.values, (int(SHdims[0]/12),12,SHdims[1],SHdims[2])
 
 # Calculate monthly timeseries
 ice_SH_ts = np.sum(ice_SH_re * farea_SH.cell_area.values[np.newaxis,np.newaxis,...], axis=(2,3)) / 1e+12
-print(ice_SH_ts[:,8]/ice_SH_ts[:,1])
-sys.exit()
 
 # Add cyclic
 ice_SH_re, lonSH = add_cyclic_point(ice_SH_re, coord=ice_SH.lon.values)

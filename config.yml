@@ -1,8 +1,8 @@
 run:
   name: "LGM"
   folder: "/scratch-shared/raymond"
-  ystart: 286
-  yend: 431
+  ystart: 331
+  yend: 434
   plotdir: "/home/raymond/LGMplots"
 
 trend:
@@ -13,10 +13,10 @@ timeseries:
   regions: ["global", "NH", "SH", "tropical"]
 
 runs:
-  B-I-LGM-rest286-200729:
-    folder: "/projects/0/couplice/archive"
-  B-I-LGM-rest316-200804:
-    folder: "/projects/0/couplice/archive"
+#  B-I-LGM-rest286-200729:
+#    folder: "/projects/0/couplice/archive"
+#  B-I-LGM-rest316-200804:
+#    folder: "/projects/0/couplice/archive"
   B-I-LGM-rest331-200814:
     folder: "/projects/0/couplice/archive"
   B-I-LGM-rest338-200817:
@@ -35,4 +35,8 @@ history:
       htype: "monavg"
     h1:
       varlist: ["LANDFRAC", "LWCF", "OCNFRAC", "QREFHT", "SWCF", "TREFHT", "U10"]
+      htype: "monavg"
+  ocn:
+    h:
+      varlist: ["TEMP"]
       htype: "monavg"
