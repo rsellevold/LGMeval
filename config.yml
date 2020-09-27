@@ -15,18 +15,18 @@ timeseries:
 runs:
 #  B-I-LGM-rest286-200729:
 #    folder: "/projects/0/couplice/archive"
-#  B-I-LGM-rest316-200804:
+  B-I-LGM-rest316-200804:
+    folder: "/projects/0/couplice/archive"
+#  B-I-LGM-rest331-200814:
 #    folder: "/projects/0/couplice/archive"
-  B-I-LGM-rest331-200814:
-    folder: "/projects/0/couplice/archive"
-  B-I-LGM-rest338-200817:
-    folder: "/projects/0/couplice/archive"
-  B-I-rest356-LGM-200828:
-    folder: "/projects/0/couplice/archive"
-  B-I-rest371-LGM-200902:
-    folder: "/projects/0/couplice/archive"
-  B-I-rest428-LGM-200920:
-    folder: "/projects/0/couplice/archive"
+#  B-I-LGM-rest338-200817:
+#    folder: "/projects/0/couplice/archive"
+#  B-I-rest356-LGM-200828:
+#    folder: "/projects/0/couplice/archive"
+#  B-I-rest371-LGM-200902:
+#    folder: "/projects/0/couplice/archive"
+#  B-I-rest428-LGM-200920:
+#    folder: "/projects/0/couplice/archive"
 
 history:
   atm:
@@ -40,3 +40,7 @@ history:
     h:
       varlist: ["TEMP"]
       htype: "monavg"
+
+compset:
+  atm:
+    bnds: "time_bnds"
