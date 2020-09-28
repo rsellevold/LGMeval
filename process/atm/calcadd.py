@@ -7,7 +7,7 @@ import xarray as xr
 import src
 
 
-def calcadd(fdir, var, ystart, yend):
+def calcadd(fdir, var):
     if var=="ALBEDO":
         try:
             FSNS = xr.open_dataset(f"{fdir}/FSNS.nc")
@@ -97,6 +97,6 @@ def main():
         data = comm.scatter(data, root=0)
         var = varlist[data]
         print(var)
-        if var is not None: calcadd(fdir, var, ystart, yend)
+        if var is not None: calcadd(fdir, var)
 
 main()

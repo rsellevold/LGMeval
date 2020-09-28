@@ -2,6 +2,10 @@ import sys,os,glob
 
 import xarray as xr
 import cftime
+from cdo import Cdo
+
+cdo = Cdo()
+
 
 def _checkdir(folder):
   check = os.path.exists(folder)
@@ -13,7 +17,7 @@ def annavg(fdir, var):
   # Computes the annual means
   outdir = f"{fdir[:-7]}/annavg"
   _checkdir(outdir)
-  cdo.yearavg(input=f"{fdir}/var", output=f"{outdir}/{var}")
+  cdo.yearavg(input=f"{fdir}/{var}", output=f"{outdir}/{var}")
 
 
 def seasavg(fdir, var):
@@ -60,6 +64,7 @@ def mergehist(config, comp, var, hfile, htype):
   try: # Check if previous data exists
     data_already = xr.open_dataset(f"{outfolder}/{var}.nc")
     data = xr.concat([data, data_already], dim="time")
+    data = data.sortby("time")
     data_already.close()
   except FileNotFoundError:
     None

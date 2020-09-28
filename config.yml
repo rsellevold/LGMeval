@@ -31,11 +31,11 @@ runs:
 history:
   atm:
     h0:
-      varlist: ["CLDHGH", "CLDLOW", "CLDMED", "CLDTOT", "FLDS", "FLNS", "FLNSC", "FLNT", "FSDS", "FSDSC", "FSNS", "FSNSC", "FSNT", "ICEFRAC", "LHFLX", "PRECC", "PRECL", "PRECSC", "PRECSL", "PSL", "SHFLX", "TGCLDCWP", "TGCLDIWP", "TMQ", "TS", "U250", "U500", "U850", "V250", "V500", "V850"]
+      varlist: ["CLDHGH"] #, "CLDLOW", "CLDMED", "CLDTOT", "FLDS", "FLNS", "FLNSC", "FLNT", "FSDS", "FSDSC", "FSNS", "FSNSC", "FSNT", "ICEFRAC", "LHFLX", "PRECC", "PRECL", "PRECSC", "PRECSL", "PSL", "SHFLX", "TGCLDCWP", "TGCLDIWP", "TMQ", "TS", "U250", "U500", "U850", "V250", "V500", "V850"]
       htype: "monavg"
-    h1:
-      varlist: ["LANDFRAC", "LWCF", "OCNFRAC", "QREFHT", "SWCF", "TREFHT", "U10"]
-      htype: "monavg"
+#    h1:
+#      varlist: ["LANDFRAC", "LWCF", "OCNFRAC", "QREFHT", "SWCF", "TREFHT", "U10"]
+#      htype: "monavg"
   ocn:
     h:
       varlist: ["TEMP"]

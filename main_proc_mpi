@@ -11,10 +11,10 @@ nproc=24
 ###############
 # Atmosphere
 ###############
-#mpirun -n $nproc python process/atm/hist.py
-#mpirun -n 1 python process/atm/calcadd.py
-#mpirun -n $nproc python process/atm/avg_mon2seas.py
-#mpirun -n $nproc python process/atm/avg_mon2ann.py
+mpirun -n $nproc python process/atm/hist.py
+mpirun -n 1 python process/atm/calcadd.py
+mpirun -n $nproc python process/atm/avg_mon2seas.py
+mpirun -n $nproc python process/atm/avg_mon2ann.py
 #mpirun -n $nproc python process/atm/trends.py
 #mpirun -n $nproc python process/atm/timeseries.py
 
